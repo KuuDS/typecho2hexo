@@ -29,6 +29,7 @@ class Content:
             "<!--markdown-->", "").replace("\r\n", "\n")
         if text[-1:] == "%":
             text = text[:-1]
+        layout = self.content[11]
         filename = "./%s.md" % slug
 
         print("\n")
@@ -41,6 +42,8 @@ class Content:
         print(u"create %s." % filename)
         f = open(filename, "w+")
         f.write(u"---\n")
+        if layout:
+            f.write(u"layout: false\n")
         f.write(u"title: %s\n" % title)
         f.write(u"date: %s\n" % date)
         f.write(u"updated: %s\n" % updated)
