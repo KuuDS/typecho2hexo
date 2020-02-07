@@ -25,7 +25,8 @@ class Content:
         slug = self.content[2]
         date = datetime.fromtimestamp(self.content[3])
         updated = datetime.fromtimestamp(self.content[4])
-        text = self.content[5].replace("<!--markdown-->", "").replace("\r\n", "\n")
+        text = self.content[5].replace(
+            "<!--markdown-->", "").replace("\r\n", "\n")
         if text[-1:] == "%":
             text = text[:-1]
         filename = "./%s.md" % slug
@@ -46,10 +47,9 @@ class Content:
         if not (self.category is None):
             f.write(u"categories:\n")
             f.write(u"- %s\n" % self.category)
-        if not self.tags.count:
+        if len(self.tags):
             f.write(u"tags:\n")
-            for tag in self.tags:
-                f.write(u"- %s\n" % tag)
+            [f.write(u"- %s\n" % tag) for tag in self.tags]
         f.write(u"---\n")
 
         f.write(text)
